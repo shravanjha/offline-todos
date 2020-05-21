@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"offlinetodos54bdfb50": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

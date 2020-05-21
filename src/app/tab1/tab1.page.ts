@@ -3,6 +3,7 @@ import { Component, AfterContentInit } from '@angular/core';
 import {Subject} from 'rxjs';
 import { AuthGuardService } from '../services/auth-route-guard'
 import { AuthService } from '../services/auth.service'
+import { Auth, Hub } from 'aws-amplify';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -10,24 +11,38 @@ import { AuthService } from '../services/auth.service'
 })
 export class Tab1Page implements AfterContentInit{
 
-  authState: any;
+  state = { user: null, customState: null };
+
   //private authState = new Subject<any>();
   // including AuthGuardService here so that it's available to listen to auth events
 
-  constructor(public authService: AuthService, public guard: AuthGuardService) {
-    this.authService.getAuth().subscribe((data)=> {
+  constructor(){}
+
+/*     this.authService.getAuth().subscribe((data)=> {
       console.log('Data received', data);
       this.authState = {loggedIn: false};
-    })
-  }
+    }) */
 
   ngAfterContentInit(){
-    this.authService.setAuth({
-      authState: this.authState
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      switch (event) {
+        case "signIn":
+          this.state.user = data;
+          break;
+        case "signOut":
+          this.state.user = null;
+          break;
+        case "customOAuthState":
+          this.state.customState = data;
+      }
     });
+
+    Auth.currentAuthenticatedUser()
+      .then(user => this.state.user = user)
+      .catch(() => console.log("Not signed in"));
   }
 
-  login() {
+/*   login() {
     this.authState.loggedIn = true;
     this.authService.setAuth({
       authState: this.authState
@@ -39,6 +54,6 @@ export class Tab1Page implements AfterContentInit{
     this.authService.setAuth({
       authState: this.authState
     });
-  }
+  } */
 
 }

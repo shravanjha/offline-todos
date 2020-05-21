@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-offlinetodos-dev-190753-authRole",
+            "UnauthRoleArn": "arn:aws:iam::355012964309:role/amplify-offlinetodos-dev-190753-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::355012964309:role/amplify-offlinetodos-dev-190753-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "amplify-offlinetodos-dev-190753-deployment",
+            "UnauthRoleName": "amplify-offlinetodos-dev-190753-unauthRole",
+            "StackName": "amplify-offlinetodos-dev-190753",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:355012964309:stack/amplify-offlinetodos-dev-190753/9be6c340-9b42-11ea-a59d-06494f833672",
+            "AmplifyAppId": "d1acstoos9cbt1"
+        },
+        "categories": {
+            "auth": {
+                "offlinetodos54bdfb50": {}
+            }
+        }
+    }
+}
