@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToDoItem, ToDoList } from '../../classes/item.class';
 
@@ -9,10 +9,10 @@ import { ToDoItem, ToDoList } from '../../classes/item.class';
 })
 export class ListItemComponent implements OnInit {
 
-  itemList: ToDoList;
-  editItem: ToDoItem;
-  user: string;
-  item: ToDoItem;
+itemList: ToDoList;
+editItem: ToDoItem;
+@Output()  user: string;
+@Output()  item: ToDoItem;
 
   constructor(private modalController: ModalController) {}
 
@@ -24,8 +24,8 @@ export class ListItemComponent implements OnInit {
     this.item = this.editItem ? Object.assign({}, this.editItem) : new ToDoItem({})
   }
 
-  save() {
-    this.modalController.dismiss({
+  async save() {
+    await this.modalController.dismiss({
       itemList: this.itemList,
       /*
         You pass back either a newItem or editItem value depending on whether an edit operation is taking place
@@ -36,7 +36,7 @@ export class ListItemComponent implements OnInit {
     });
   };
 
-  cancel(){
-    this.modalController.dismiss({itemList: this.itemList})
+  async cancel(){
+    await this.modalController.dismiss({itemList: this.itemList})
   }
 }

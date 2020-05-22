@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { Hub } from 'aws-amplify';
+import { Hub, Auth } from 'aws-amplify';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
@@ -23,6 +23,34 @@ export class AuthGuardService implements CanActivate {
   }
 
   canActivate() {
-    return this.signedIn;
+    //return (this.signedIn && this.hasActiveSession());
+    return (this.signedIn);
   }
+
+/*   hasActiveSession():boolean{
+    try{
+      Auth.currentAuthenticatedUser().then((userSession) => {
+      if (userSession) {
+        console.log('Active Session: '+ userSession)
+        return true;
+      } else {
+        this.router.navigate(['/tabs/tab1'], {
+          queryParams: {
+            returnUrl: state.url
+          }
+        });
+        return false;
+      }
+    });
+  }
+  catch(error){
+    console.log('AuthGuardError: '+ error)
+    this.router.navigate(['/tabs/tab1'], {
+      queryParams: {
+        returnUrl: state.url
+      }
+    });
+    return false;
+  }
+  } */
 }

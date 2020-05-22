@@ -8,7 +8,9 @@
 </ion-header>
 <ion-content *ngIf="itemList">
     <ion-card *ngFor="let item of itemList.items; let i = index">
-      <ion-card-title class="hover card-title" (click)="modify(item, i)">{{item.title}}</ion-card-title>
+      <ion-card-title class="hover card-title" (click)="modify(item, i)">{{item.title}}
+        <p>{{item.description}}</p>
+      </ion-card-title>
       <ion-card-content>
         <ion-buttons slot="end">
           <ion-button (click)="delete(i)">
