@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,21 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  subscription: Subscription;
+  public loggedIn: boolean;
 
+  constructor(
+    public auth: AuthService
+  ) { }
+
+  ngOnInit() {
+    this.subscription = this.auth.isAuthenticated()
+      .subscribe(result => {
+        this.loggedIn = result;
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

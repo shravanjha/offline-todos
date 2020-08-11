@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
-import { ListPage } from '../list//list.page';
 import { AuthGuardService } from '../services/auth-route-guard';
 const routes: Routes = [
   {

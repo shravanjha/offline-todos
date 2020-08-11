@@ -35,8 +35,10 @@ export class ListPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    DataStore.observe().subscribe(this.getItems).unsubscribe();
     DataStore.observe().subscribe(this.getItems);
+  }
+  ionViewDidLeave(){
+    DataStore.observe().subscribe(this.getItems).unsubscribe();
   }
   ngOnInit(){
     this.getItems();
